@@ -27,14 +27,14 @@ from strings import get_string
 @LanguageStart
 async def start_pm(client, message: Message, _):
     await add_served_user(message.from_user.id)
-    await message.react("❤")
+    await message.react("🍓")
     if len(message.text.split()) > 1:
         name = message.text.split(None, 1)[1]
         if name[0:4] == "help":
             keyboard = help_pannel(_)
-            await message.reply_sticker("CAACAgUAAxkBAAEQI1RlTLnRAy4h9lOS6jgS5FYsQoruOAAC1gMAAg6ryVcldUr_lhPexzME")
-            return await message.reply_photo(
-                photo=config.START_IMG_URL,
+            await message.reply_sticker("CAACAgUAAxkBAAEPrDNpBMPWsxkXz32WIETAATUkY_uwewACcwcAAiRO8VXjkW9AnnwsLTYE")
+            return await message.video(
+                photo=config.START_VIDEO_URL,
                 caption=_["help_1"].format(config.SUPPORT_CHAT),
                 reply_markup=keyboard,
             )
@@ -47,7 +47,7 @@ async def start_pm(client, message: Message, _):
                 )
             return
         if name[0:3] == "inf":
-            m = await message.reply_text("🔎")
+            m = await message.reply_text("💌")
             query = (str(name)).replace("info_", "", 1)
             query = f"https://www.youtube.com/watch?v={query}"
             results = VideosSearch(query, limit=1)
@@ -87,12 +87,12 @@ async def start_pm(client, message: Message, _):
 
         try:
             out = private_panel(_)
-            lol = await message.reply_text("𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ︎ {}.. ❣️".format(message.from_user.mention))
-            await lol.edit_text("𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 🥳".format(message.from_user.mention))
-            await lol.edit_text("𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 💥".format(message.from_user.mention))
-            await lol.edit_text("𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 🤩".format(message.from_user.mention))
-            await lol.edit_text("𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 💌".format(message.from_user.mention))
-            await lol.edit_text("𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐁𝐚𝐛𝐲 ꨄ {}.. 💞".format(message.from_user.mention))
+            lol = await message.reply_text("Mᴀʀᴄʜ Is Sᴛᴀʀᴛɪɴɢ, Dᴇᴀʀ {}.. ❣️".format(message.from_user.mention))
+            await lol.edit_text("Mᴀʀᴄʜ Is Sᴛᴀʀᴛɪɴɢ, Dᴇᴀʀ {}.. 🥳".format(message.from_user.mention))
+            await lol.edit_text("Mᴀʀᴄʜ Is Sᴛᴀʀᴛɪɴɢ, Dᴇᴀʀ {}.. 💥".format(message.from_user.mention))
+            await lol.edit_text("Mᴀʀᴄʜ Is Sᴛᴀʀᴛɪɴɢ, Dᴇᴀʀ {}.. 🤩".format(message.from_user.mention))
+            await lol.edit_text("Mᴀʀᴄʜ Is Sᴛᴀʀᴛɪɴɢ, Dᴇᴀʀ {}.. 💌".format(message.from_user.mention))
+            await lol.edit_text("Mᴀʀᴄʜ Is Sᴛᴀʀᴛɪɴɢ, Dᴇᴀʀ {}.. 💞".format(message.from_user.mention))
                
             await lol.delete()
             lols = await message.reply_text("**⚡️ѕ**")
@@ -117,7 +117,7 @@ async def start_pm(client, message: Message, _):
 
             await lols.edit_text("**⚡ѕтαятιиg.**")
             await lols.edit_text("**⚡ѕтαятιиg....**")
-            m = await message.reply_sticker("CAACAgUAAxkBAAEQI1BlTLmx7PtOO3aPNshEU2gCy7iAFgACNQUAApqMuVeA6eJ50VbvmDME")
+            m = await message.reply_sticker("CAACAgUAAxkBAAEPrDNpBMPWsxkXz32WIETAATUkY_uwewACcwcAAiRO8VXjkW9AnnwsLTYE")
             if message.chat.photo:
 
                 userss_photo = await app.download_media(
@@ -186,8 +186,8 @@ async def welcome(client, message: Message):
                     return await app.leave_chat(message.chat.id)
 
                 out = start_panel(_)
-                await message.reply_photo(
-                    photo=config.START_IMG_URL,
+                await message.reply_video(
+                    photo=config.START_VIDEO_URL,
                     caption=_["start_3"].format(
                         message.from_user.first_name,
                         app.mention,
