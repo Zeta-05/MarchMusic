@@ -1,58 +1,100 @@
 import re
-import os
-from os import getenv
-
 from dotenv import load_dotenv
 from pyrogram import filters
-
 load_dotenv()
 
-# Get this value from my.telegram.org/apps
-API_ID = int(getenv("API_ID", None))
-API_HASH = getenv("API_HASH", None)
+# Function to clean and convert environment variables to integers safely
+def clean_int(value, default=0):
+    try:
+        return int(str(value).strip().replace("\u200e", ""))
+    except ValueError:
+        return default
 
-# Get your token from @BotFather on Telegram.
-BOT_TOKEN = getenv("BOT_TOKEN", None)
+# Get values from environment variables
+API_ID = "12345678"
+API_HASH = "f4ke90hash0000example9999"
+BOT_TOKEN = "9999999999:AAFakeBotTokenExample0000"
+MONGO_DB_URI = "mongodb+srv://username:password@cluster0.mongodb.net/?retryWrites=true&w=majority"
 
-# Get your mongo url from cloud.mongodb.com
-MONGO_DB_URI = getenv("MONGO_DB_URI", None)
-MUSIC_BOT_NAME = getenv("MUSIC_BOT_NAME", None)
-PRIVATE_BOT_MODE = getenv("PRIVATE_BOT_MODE", None)
+DURATION_LIMIT_MIN = clean_int(os.getenv("DURATION_LIMIT", 60000))
+ADS_MODE = os.getenv("ADS_MODE", None)
+LOGGER_ID = clean_int(os.getenv("LOGGER_ID", "-1001234567890"))
+OWNER_ID = clean_int(os.getenv("OWNER_ID", "1234567890"))
 
-DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 900))
+# Heroku Configs
+HEROKU_APP_NAME = os.getenv("HEROKU_APP_NAME", "fake-heroku-app")
+HEROKU_API_KEY = os.getenv("HEROKU_API_KEY", "fakeherokuapikey000000")
 
-# Chat id of a group for logging bot's activities
-LOGGER_ID = int(getenv("LOGGER_ID", None))
+# API URLs
+API_URL = 'https://pytdbotapi.fakeapi.xyz'  # youtube song url
+VIDEO_API_URL = "https://api.video.fakeapi.xyz"
+API_KEY = "FAKEAPIKEY-00000-EXAMPLE-12345"  # fake youtube song api key
 
-# Get this value from @BRANDRD_ROBOT on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID", "7250012103"))
+# Repository Information
+UPSTREAM_REPO = os.getenv("UPSTREAM_REPO", "https://github.com/example/FakeMusicBot")
+UPSTREAM_BRANCH = os.getenv("UPSTREAM_BRANCH", "master")
+GIT_TOKEN = os.getenv("GIT_TOKEN", "fakegitkey000000")
 
-LOG = int(getenv("LOG", True))
+# Telegram Support & Channels
+SUPPORT_CHANNEL = os.getenv("SUPPORT_CHANNEL", "https://t.me/FakeSupportChannel")
+SUPPORT_CHAT = os.getenv("SUPPORT_CHAT", "https://t.me/FakeSupportGroup")
 
-## Fill these variables if you're deploying on heroku.
-# Your heroku app name
-HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
-# Get it from http://dashboard.heroku.com/account
-HEROKU_API_KEY = getenv("HEROKU_API_KEY")
+AUTO_LEAVING_ASSISTANT = bool(os.getenv("AUTO_LEAVING_ASSISTANT", None))
 
-API_URL = getenv("API_URL", 'https://api.thequickearn.xyz')
-VIDEO_API_URL = getenv("VIDEO_API_URL", 'https://api.video.thequickearn.xyz')
-API_KEY = getenv("API_KEY", '30DxNexGenBotsfcfad8')
- 
+# Spotify API Credentials
+SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID", "fake_spotify_id")
+SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET", "fake_spotify_secret")
 
-UPSTREAM_REPO = getenv(
-    "UPSTREAM_REPO",
-    "https://github.com/WCGKING/BrandrdXMusic",
-)
-UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "main")
-GIT_TOKEN = getenv(
-    "GIT_TOKEN", None
-)  # Fill this variable if your upstream repository is private
+# Playlist Limits
+PLAYLIST_FETCH_LIMIT = clean_int(os.getenv("PLAYLIST_FETCH_LIMIT", 25))
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/BRANDED_PAID_CC")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/BRANDED_WORLD")
+# Telegram File Size Limits (in bytes)
+TG_AUDIO_FILESIZE_LIMIT = clean_int(os.getenv("TG_AUDIO_FILESIZE_LIMIT", 104857600))
+TG_VIDEO_FILESIZE_LIMIT = clean_int(os.getenv("TG_VIDEO_FILESIZE_LIMIT", 1073741824))
 
-# Set this to True if you want the assistant to automatically leave chats after an interval
+# Pyrogram Session Strings (FAKE)
+STRING1 = "BQFakeSessionExampleString0000"
+STRING2 = os.getenv("STRING_SESSION2", "BQFakeSessionExample2")
+STRING3 = os.getenv("STRING_SESSION3", None)
+STRING4 = os.getenv("STRING_SESSION4", None)
+STRING5 = os.getenv("STRING_SESSION5", None)
+
+# Banned Users & Other Variables
+BANNED_USERS = filters.user()
+adminlist = {}
+lyrical = {}
+votemode = {}
+autoclean = []
+confirmer = {}
+
+# Image & Video URLs
+START_VIDEO_URL = os.getenv("START_VIDEO_URL", "https://files.catbox.moe/fakevideo.mp4")
+START_IMG_URL = os.getenv("START_IMG_URL", "https://files.catbox.moe/fakeimage.jpg")
+PING_IMG_URL = os.getenv("PING_IMG_URL", "https://files.catbox.moe/fakeimage.jpg")
+PLAYLIST_IMG_URL = "https://files.catbox.moe/fakeimage.jpg"
+STATS_IMG_URL = "https://files.catbox.moe/fakeimage.jpg"
+TELEGRAM_AUDIO_URL = "https://files.catbox.moe/fakeimage.jpg"
+TELEGRAM_VIDEO_URL = "https://files.catbox.moe/fakeimage.jpg"
+STREAM_IMG_URL = "https://files.catbox.moe/fakeimage.jpg"
+SOUNCLOUD_IMG_URL = "https://files.catbox.moe/fakeimage.jpg"
+YOUTUBE_IMG_URL = "https://files.catbox.moe/fakeimage.jpg"
+SPOTIFY_ARTIST_IMG_URL = "https://files.catbox.moe/fakeimage.jpg"
+SPOTIFY_ALBUM_IMG_URL = "https://files.catbox.moe/fakeimage.jpg"
+SPOTIFY_PLAYLIST_IMG_URL = "https://files.catbox.moe/fakeimage.jpg"
+
+# Convert time format (hh:mm:ss) to seconds
+def time_to_seconds(time):
+    stringt = str(time)
+    return sum(int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
+
+DURATION_LIMIT = time_to_seconds(f"{DURATION_LIMIT_MIN}:00")
+
+# Validate URLs
+if SUPPORT_CHANNEL and not re.match("(?:http|https)://", SUPPORT_CHANNEL):
+    raise SystemExit("[ERROR] - Your SUPPORT_CHANNEL URL is incorrect. It must start with https://")
+
+if SUPPORT_CHAT and not re.match("(?:http|https)://", SUPPORT_CHAT):
+    raise SystemExit("[ERROR] - Your SUPPORT_CHAT URL is incorrect. It must start with https://") to automatically leave chats after an interval
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
 
 # Auto Gcast/Broadcast Handler (True = broadcast on , False = broadcast off During Hosting, Dont Do anything here.)
